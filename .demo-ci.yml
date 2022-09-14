@@ -1,0 +1,33 @@
+stages:
+  - Lint
+  - Build Image
+  - Beta Integrate Test
+
+
+
+yapf:
+  stage: Lint
+  image:
+    name: DemoImage
+  before_script:
+    - pip install yapf==0.28.0
+  script:
+    - 'yapf --style="{indent_width:2,column_limit:120,continuation_indent_width:2,allow_split_before_dict_value=False,indent_dictionary_value=True}" -rd --exclude "manage.py" .'
+
+build_image:
+  stage: Build Image
+  image:
+    name: DemoImage
+    entrypoint: [""]
+  script:
+    - sh ci/build_image.sh
+
+beta_test:
+  stage: Beta Integrate Test
+  script:
+    - bash ci/run_integrate_test.sh xxx false $CI_SERVICE_OWNER
+  except:
+    - release
+  tags:
+    - c5-staging-train
+  retry: 1
