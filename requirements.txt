@@ -1,8 +1,10 @@
 opt-einsum
 configparser
-PyMySQL
 Django>2
 requests>=2.12
 pykube>=0.14.0
 thrift
 python-etcd>=0.4
+djangorestframework
+gunicorn
+mysqlclient

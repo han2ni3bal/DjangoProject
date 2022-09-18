@@ -1,5 +1,5 @@
 from django.db import models
-from common_task import CommonTask
+from .common_task import CommonTask
 # Create your models here.
 
 
@@ -15,6 +15,5 @@ class DemoJob(CommonTask):
   def create(cls, job_name):
     job = cls()
     job.job_name = job_name
-
     job.save()
     return job
